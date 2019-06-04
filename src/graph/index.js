@@ -1,4 +1,4 @@
-const sequence = require('./sequence');
+const sequence = require('../sequence');
 
 module.exports = () => {
     const nodes = {};
