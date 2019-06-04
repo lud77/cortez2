@@ -1,14 +1,16 @@
-module.exports = () => {
-    let value = 0;
+module.exports = (init) => {
+    let value = init || 0;
 
-    const next = () => ++value;
+    const current = () => value;
+
+    const next = () => value++;
 
     const set = (val) => {
         value = val;
     };
 
     return {
-        value,
+        current,
         next,
         set
     };
