@@ -5,12 +5,15 @@ module.exports = () => {
     const edges = {};
 
     const nodeSeq = sequence();
+    const edgeSeq = sequence();
 
     const inbound = {};
     const outbound = {};
 
     const setNode = (id, payload) => {
         nodes[id] = { id, payload };
+
+        if (id > nodeSeq.current()) nodeSeq.set(id + 1);
     };
 
     const addNode = (payload) => {
@@ -29,10 +32,12 @@ module.exports = () => {
 
         edges[id] = {
           id,
-          sorceId,
+          sourceId,
           targetId,
           payload
         };
+
+        if (id > edgeSeq.current()) edgeSeq.set(id + 1);
     };
 
     const addEdge = (sourceId, targetId, payload) => {
