@@ -15,7 +15,7 @@ test('should set a specific node in the graph and update the sequence', () => {
     expect(g.nodes[4]).toBeDefined();
 });
 
-test('should add an edge between two nodes in the graph', () => {
+test('should add an edge between two nodes', () => {
     const g = graph();
     const sourceId = g.addNode();
     const targetId = g.addNode();
@@ -26,7 +26,7 @@ test('should add an edge between two nodes in the graph', () => {
     expect(g.edges[edgeId].targetId).toBe(targetId);
 });
 
-test('should retrieve all edges leaving a node in the graph', () => {
+test('should retrieve all edges leaving a node', () => {
     const g = graph();
     const sourceId = g.addNode();
     const firstTargetId = g.addNode();
@@ -37,7 +37,7 @@ test('should retrieve all edges leaving a node in the graph', () => {
     expect(g.getEdgesFrom(sourceId).size).toBe(2);
 });
 
-test('should retrieve all edges entering a node in the graph', () => {
+test('should retrieve all edges entering a node', () => {
     const g = graph();
     const firstSourceId = g.addNode();
     const secondSourceId = g.addNode();
@@ -46,4 +46,33 @@ test('should retrieve all edges entering a node in the graph', () => {
     g.addEdge(secondSourceId, targetId);
 
     expect(g.getEdgesTo(targetId).size).toBe(2);
+});
+
+test('should remove all edges from/to a node', () => {
+    const g = graph();
+    const firstId = g.addNode();
+    const secondId = g.addNode();
+    const thirdId = g.addNode();
+    g.addEdge(firstId, secondId);
+    g.addEdge(secondId, thirdId);
+
+    g.disconnectNode(secondId);
+
+    expect(g.getEdgesTo(secondId)).toBeUndefined();
+    expect(g.getEdgesFrom(secondId)).toBeUndefined();
+});
+
+test('should remove a node and all its edges from the graph', () => {
+    const g = graph();
+    const firstId = g.addNode();
+    const secondId = g.addNode();
+    const thirdId = g.addNode();
+    g.addEdge(firstId, secondId);
+    g.addEdge(secondId, thirdId);
+
+    g.removeNode(secondId);
+
+    expect(g.nodes[secondId]).toBeUndefined();
+    expect(g.getEdgesTo(secondId)).toBeUndefined();
+    expect(g.getEdgesFrom(secondId)).toBeUndefined();
 });

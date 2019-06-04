@@ -50,6 +50,23 @@ module.exports = () => {
     const getEdgesTo = (nodeId) => inbound[nodeId];
     const getEdgesFrom = (nodeId) => outbound[nodeId];
 
+    const disconnectNode = (nodeId) => {
+        inbound[nodeId].forEach((edgeId) => {
+            delete edges[edgeId];
+        });
+        delete inbound[nodeId];
+
+        outbound[nodeId].forEach((edgeId) => {
+            delete edges[edgeId];
+        });
+        delete outbound[nodeId];
+    };
+
+    const removeNode = (id) => {
+        disconnectNode(id);
+        delete nodes[id];
+    };
+
     return {
         nodes,
         edges,
@@ -58,6 +75,8 @@ module.exports = () => {
         setNode,
         setEdge,
         getEdgesTo,
-        getEdgesFrom
+        getEdgesFrom,
+        disconnectNode,
+        removeNode
     }
 };
