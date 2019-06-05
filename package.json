@@ -1,14 +1,25 @@
 {
   "name": "cortez2",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "A node module providing some basic data structures with pure js implementation",
+  "keywords": [
+    "graph",
+    "sequence",
+    "queue",
+    "data-structures"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Stefano Butera",
+    "email": "stefano.butera@nethnic.com",
+    "url": "https://github.com/lud77"
+  },
+  "license": "MIT",
   "devDependencies": {
     "jest": "^24.8.0"
-  }
+  },
+  "homepage": "https://github.com/lud77/cortez2"
 }
