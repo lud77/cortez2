@@ -51,15 +51,19 @@ module.exports = () => {
     const getEdgesFrom = (nodeId) => outbound[nodeId];
 
     const disconnectNode = (nodeId) => {
-        inbound[nodeId].forEach((edgeId) => {
-            delete edges[edgeId];
-        });
-        delete inbound[nodeId];
+        if (inbound[nodeId]) {
+            inbound[nodeId].forEach((edgeId) => {
+                delete edges[edgeId];
+            });
+            delete inbound[nodeId];
+        }
 
-        outbound[nodeId].forEach((edgeId) => {
-            delete edges[edgeId];
-        });
-        delete outbound[nodeId];
+        if (outbound[nodeId]) {
+            outbound[nodeId].forEach((edgeId) => {
+                delete edges[edgeId];
+            });
+            delete outbound[nodeId];
+        }
     };
 
     const removeNode = (id) => {

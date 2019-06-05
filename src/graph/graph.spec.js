@@ -93,3 +93,23 @@ test('should support self-edges', () => {
 
     expect(g.edges[0]).toBeUndefined();
 });
+
+
+test('should support self-edges', () => {
+    const g = graph();
+    const firstNodeId = g.addNode();
+    const secondNodeId = g.addNode();
+    g.addEdge(firstNodeId, secondNodeId);
+    g.addEdge(firstNodeId, secondNodeId);
+
+    expect(g.edges[0].sourceId).toBe(0);
+    expect(g.edges[0].targetId).toBe(1);
+    expect(g.edges[1].sourceId).toBe(0);
+    expect(g.edges[1].targetId).toBe(1);
+    expect(Object.values(g.edges).length).toBe(2);
+
+    g.disconnectNode(firstNodeId);
+
+    expect(g.edges[0]).toBeUndefined();
+    expect(g.edges[1]).toBeUndefined();
+});
