@@ -47,8 +47,8 @@ module.exports = () => {
         return id;
     };
 
-    const getEdgesTo = (nodeId) => inbound[nodeId];
-    const getEdgesFrom = (nodeId) => outbound[nodeId];
+    const getEdgesTo = (nodeId) => inbound[nodeId] || new Set();
+    const getEdgesFrom = (nodeId) => outbound[nodeId] || new Set();
 
     const disconnectNode = (nodeId) => {
         if (inbound[nodeId]) {
