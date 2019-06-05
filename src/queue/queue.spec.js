@@ -2,11 +2,11 @@ const queue = require('./index');
 
 test('should return true when the queue is empty', () => {
     const q = queue();
-    expect(q.empty()).toBe(true);
+    expect(q.isEmpty()).toBe(true);
     q.enqueue(1);
-    expect(q.empty()).toBe(false);
+    expect(q.isEmpty()).toBe(false);
     q.dequeue();
-    expect(q.empty()).toBe(true);
+    expect(q.isEmpty()).toBe(true);
 });
 
 test('should add items to the queue', () => {

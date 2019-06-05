@@ -23,7 +23,7 @@ module.exports = () => {
 
     const size = () => inbox.length + outbox.length;
 
-    const empty = () => size() === 0;
+    const isEmpty = () => size() === 0;
 
-    return { enqueue, dequeue, peek, size, empty };
+    return { enqueue, dequeue, peek, size, isEmpty };
 };
