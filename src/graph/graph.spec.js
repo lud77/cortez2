@@ -76,3 +76,17 @@ test('should remove a node and all its edges from the graph', () => {
     expect(g.getEdgesTo(secondId)).toBeUndefined();
     expect(g.getEdgesFrom(secondId)).toBeUndefined();
 });
+
+test('should support self-edges', () => {
+    const g = graph();
+    const nodeId = g.addNode();
+    g.addEdge(nodeId, nodeId);
+
+    expect(g.edges[0].sourceId).toBe(0);
+    expect(g.edges[0].targetId).toBe(0);
+    expect(Object.values(g.edges).length).toBe(1);
+
+    g.disconnectNode(nodeId);
+
+    expect(g.edges[0]).toBeUndefined();
+});
