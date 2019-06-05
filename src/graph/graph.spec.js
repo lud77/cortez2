@@ -81,10 +81,13 @@ test('should support self-edges', () => {
     const g = graph();
     const nodeId = g.addNode();
     g.addEdge(nodeId, nodeId);
+    g.addEdge(nodeId, nodeId);
 
     expect(g.edges[0].sourceId).toBe(0);
     expect(g.edges[0].targetId).toBe(0);
-    expect(Object.values(g.edges).length).toBe(1);
+    expect(g.edges[1].sourceId).toBe(0);
+    expect(g.edges[1].targetId).toBe(0);
+    expect(Object.values(g.edges).length).toBe(2);
 
     g.disconnectNode(nodeId);
 
