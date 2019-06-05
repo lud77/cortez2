@@ -71,6 +71,26 @@ module.exports = () => {
         delete nodes[id];
     };
 
+    const toString = (options) => {
+        const idLabel = ({ id }) => id;
+
+        const opts = options || {};
+        const nodeLabel = opts.nodeLabel || idLabel;
+        const edgeLabel = opts.edgeLabel || idLabel;
+
+        const nodeDef = Object.values(nodes)
+            .map((node) => [node.id, nodeLabel(node)])
+            .map(([id, label]) => `\t${id} [label="${label}"];`)
+            .join(`\n`);
+
+        const edgeDef = Object.values(edges)
+            .map((edge) => [edgeLabel(edge), edge.sourceId, edge.targetId])
+            .map(([label, source, target]) => `\t${source} -> ${target} [label="${label}"];`)
+            .join(`\n`);
+
+        return `digraph {\n${nodeDef}\n${edgeDef}\n}`;
+    };
+
     return {
         nodes,
         edges,
@@ -81,6 +101,7 @@ module.exports = () => {
         getEdgesTo,
         getEdgesFrom,
         disconnectNode,
-        removeNode
+        removeNode,
+        toString
     }
 };

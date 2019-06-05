@@ -58,8 +58,8 @@ test('should remove all edges from/to a node', () => {
 
     g.disconnectNode(secondId);
 
-    expect(g.getEdgesTo(secondId)).toBeUndefined();
-    expect(g.getEdgesFrom(secondId)).toBeUndefined();
+    expect(g.getEdgesTo(secondId).size).toBeDefined();
+    expect(g.getEdgesFrom(secondId).size).toBeDefined();
 });
 
 test('should remove a node and all its edges from the graph', () => {
@@ -73,8 +73,8 @@ test('should remove a node and all its edges from the graph', () => {
     g.removeNode(secondId);
 
     expect(g.nodes[secondId]).toBeUndefined();
-    expect(g.getEdgesTo(secondId)).toBeUndefined();
-    expect(g.getEdgesFrom(secondId)).toBeUndefined();
+    expect(g.getEdgesTo(secondId).size).toBeDefined();
+    expect(g.getEdgesFrom(secondId).size).toBeDefined();
 });
 
 test('should support self-edges', () => {
@@ -112,4 +112,21 @@ test('should support self-edges', () => {
 
     expect(g.edges[0]).toBeUndefined();
     expect(g.edges[1]).toBeUndefined();
+});
+
+test('should generate the proper dot notation output', () => {
+    const g = graph();
+    const d = g.addNode({ label: 'daddy' });
+    const m = g.addNode({ label: 'mommy' });
+    const k = g.addNode({ label: 'kid' });
+
+    g.addEdge(d, m, { label: 'husband of' });
+    g.addEdge(m, d, { label: 'wife of' });
+    g.addEdge(d, k, { label: 'father of' });
+    g.addEdge(m, k, { label: 'mother of' });
+
+    expect(g.toString({
+        nodeLabel: ({ payload }) => payload.label,
+        edgeLabel: ({ payload }) => payload.label
+    })).toBe(`digraph {\n\t0 [label="daddy"];\n\t1 [label="mommy"];\n\t2 [label="kid"];\n\t0 -> 1 [label="husband of"];\n\t1 -> 0 [label="wife of"];\n\t0 -> 2 [label="father of"];\n\t1 -> 2 [label="mother of"];\n}`);
 });
