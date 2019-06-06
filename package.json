@@ -10,7 +10,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .js ."
   },
   "author": {
     "name": "Stefano Butera",
@@ -19,6 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "jest": "^24.8.0"
   },
   "homepage": "https://github.com/lud77/cortez2"

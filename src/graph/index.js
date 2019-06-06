@@ -31,10 +31,10 @@ module.exports = () => {
         outbound[sourceId].add(id);
 
         edges[id] = {
-          id,
-          sourceId,
-          targetId,
-          payload
+            id,
+            sourceId,
+            targetId,
+            payload
         };
 
         if (id > edgeSeq.current()) edgeSeq.set(id + 1);
@@ -103,5 +103,5 @@ module.exports = () => {
         disconnectNode,
         removeNode,
         toString
-    }
+    };
 };
