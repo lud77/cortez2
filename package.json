@@ -1,6 +1,6 @@
 {
   "name": "cortez2",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A node module providing some basic data structures with pure js implementation",
   "keywords": [
     "graph",
