@@ -34,12 +34,12 @@ const buildGraph = () => {
 
 test('dfs should find the predicted path to the target node', () => {
     const g = buildGraph();
-    const path = dfs((nodeId) => nodeId % 3 === 2, 0, g).map((edge) => edge.targetId);
+    const path = dfs((nodeId) => nodeId % 3 === 2, 0, g, g.getEdgesFrom).map((edge) => edge.targetId);
     expect(path).toEqual([0, 3, 6, 11]);
 });
 
 test('bfs should find the predicted path to the target node', () => {
     const g = buildGraph();
-    const path = bfs((nodeId) => nodeId % 3 == 2, 0, g).map((edge) => edge.targetId);
+    const path = bfs((nodeId) => nodeId % 3 == 2, 0, g, g.getEdgesFrom).map((edge) => edge.targetId);
     expect(path).toEqual([0, 2]);
 });

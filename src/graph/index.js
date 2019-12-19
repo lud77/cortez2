@@ -49,6 +49,7 @@ module.exports = () => {
 
     const getEdgesTo = (nodeId) => inbound[nodeId] || new Set();
     const getEdgesFrom = (nodeId) => outbound[nodeId] || new Set();
+    const getEdges = (nodeId) => new Set([...getEdgesTo(nodeId), ...getEdgesFrom(nodeId)]);
 
     const disconnectNode = (nodeId) => {
         if (inbound[nodeId]) {
@@ -100,6 +101,7 @@ module.exports = () => {
         setEdge,
         getEdgesTo,
         getEdgesFrom,
+        getEdges,
         disconnectNode,
         removeNode,
         toString

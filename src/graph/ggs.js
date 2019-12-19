@@ -1,4 +1,4 @@
-module.exports = (frontierManager) => (isGoal, startNodeId, graph) => {
+module.exports = (frontierManager) => (isGoal, startNodeId, graph, expand) => {
     const discovered = {};
     const fm = frontierManager();
 
@@ -11,7 +11,7 @@ module.exports = (frontierManager) => (isGoal, startNodeId, graph) => {
 
         if (isGoal(last)) return path;
 
-        graph.getEdgesFrom(last).forEach((edgeId) => {
+        expand(last).forEach((edgeId) => {
             const edge = graph.edges[edgeId];
             if (!discovered[edge.targetId]) {
                 discovered[edge.targetId] = true;
